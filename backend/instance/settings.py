@@ -1,5 +1,10 @@
 import os
 
+# Here we assign all the environment variables to a 
+# python file which is recognised by flask to perform 
+# various configurable operations throughout our flask 
+# backend application.
+
 SECRET_KEY=os.environ['SECRET_KEY']
 DB_USERNAME=os.environ['DB_USERNAME']
 DB_PASSWORD=os.environ['DB_PASSWORD']

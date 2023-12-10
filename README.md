@@ -1,1 +1,1 @@
-# Forecasting Mental Wellbeing
+# Forecasting Mental Wellbeing: A Suicide Predictor and Mental Health Problems

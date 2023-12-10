@@ -9,18 +9,15 @@ import PrimeVue from 'primevue/config';
 import FileUpload from 'primevue/fileupload';
 import Card from 'primevue/card'
 import Button from 'primevue/button'
-// import { Chart, registerables } from 'primevue/chart';
 import Chart from 'primevue/chart';
 import registrables from 'primevue/chart'
 import Fieldset from 'primevue/fieldset';
 import Dropdown from 'primevue/dropdown';
 
+// We wrap our whole application here with the create app 
+// utility and add all the custom components that we have used all 
+// over our web applicaiton.
 
-
-
-
-
-// createApp(App).use(store).use(router).mount('#app')
 const app = createApp(App)
 
 app.use(router).use(PrimeVue, { ripple: true });
@@ -33,4 +30,6 @@ app.component('Dropdown', Dropdown);
 
 app.mount('#app');
 
-Chart.register(...registerables);
+// we are registring the chart's registrables required 
+// to run our charts effectively.
+Chart.register(...registrables);

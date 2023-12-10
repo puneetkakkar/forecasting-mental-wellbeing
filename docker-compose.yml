@@ -1,3 +1,6 @@
+# Here, it is a docker compose config file, that includes frontend, 
+# backend, and mysql services along with their environment variables.
+
 version: '2'
 services:
   frontend:
@@ -28,8 +31,8 @@ services:
     environment:
         PORT: 5000
         SECRET_KEY: 'you-will-never-guess'
-        DEBUG: 1
-        FLASK_DEBUG: 1
+        DEBUG: 0
+        FLASK_DEBUG: 0
         FLASK_APP: 'manage'
         DB_USERNAME: sapbuffalo
         DB_PASSWORD: sap

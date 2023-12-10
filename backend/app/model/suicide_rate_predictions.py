@@ -1,11 +1,13 @@
 from . import db
 from . import AppModel
 
+# This model is used to save all the predictions that our model has 
+# just made after taking input dataset from the user via our web-application.
+# here, we define all the fields required for our table.
 class SuicideRatePredictions(AppModel):
     id = db.Column(db.Integer, primary_key=True)
     entity = db.Column(db.String(50))
     code = db.Column(db.String(10))
-    # country = db.Column(db.String(255))
     schizophrenia = db.Column(db.Integer)
     bipolar_disorder = db.Column(db.Integer)
     eating_disorders = db.Column(db.Integer)

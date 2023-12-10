@@ -3,7 +3,8 @@ import Home from '../views/Home.vue'
 import Input from '../views/Input.vue'
 import Visualize from '../views/Visualization.vue'
 
-//creating routes for the three pages
+// We define all of our web application routes here 
+// that are accessble over the web.
 const routes = [
   {
     path: '/',
@@ -22,6 +23,8 @@ const routes = [
   }
 ]
 
+// Binding all the above routes listed above with the 
+// createRouter utility provided by the vue-router
 const router = createRouter({
   history: createWebHashHistory(),
   routes

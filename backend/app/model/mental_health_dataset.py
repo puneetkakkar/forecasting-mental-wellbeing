@@ -1,6 +1,8 @@
 from . import db
 from . import AppModel
 
+# It includes the schema for our input mental health dataset which 
+# includes all the predictions made by our trained model.
 class MentalHealthDataset(AppModel):
     id = db.Column(db.Integer, primary_key=True)
     entity = db.Column(db.String(50))

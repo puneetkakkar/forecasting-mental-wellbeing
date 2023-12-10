@@ -1,12 +1,13 @@
+# Use an official Python runtime as a parent image
 FROM python:3.8-slim
 
 # make a local directory
 RUN mkdir /backend
 
-# set "/app" as the working directory from which CMD, RUN, ADD references
+# set "/backend" as the working directory from which CMD, RUN, ADD references
 WORKDIR /backend
 
-# now copy all the files in this directory to /code
+# now copy all the files in this directory to /backend
 ADD /backend/ .
 
 # pip install the local requirements.txt

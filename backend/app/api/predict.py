@@ -5,8 +5,11 @@ from utils import pkl_loader, util
 from flask import current_app as app
 from app.model import db
 
+# Defining the predict api-endpoint for our flask backend application.
 predict = Blueprint("predict", __name__, url_prefix='/predict')
 
+# Performing the operations required to predict the suicide rates 
+# based on the input dataset served to the backend API via the frontend.
 @predict.route('/rf', methods=['POST'])
 def rf():
     try:
@@ -70,9 +73,11 @@ def rf():
             'Entity':'entity', 'Code':'code', 'Prevalence in females (%)':'prevalence_in_females', 'Prevalence in males (%)':'prevalence_in_males', 'Adult 20-34 years old (%)': 'adult_percentage', 'Old 50-70+ years old (%)': 'old_percentage', 'Young 10-19 years old (%)':'young_percentage', 'Alcohol use disorders (%)': 'alcohol_use_disorders', 'Anxiety disorders (%)':'anxiety_disorders', 'Bipolar disorder (%)':'bipolar_disorder', 'Depression (%)': 'depression', 'Drug use disorders (%)':'drug_use_disorders', 'Schizophrenia (%)':'schizophrenia', 'Eating disorders (%)': 'eating_disorders', 'Depressive disorder rates (number suffering per 100,000)':'depressive_disorder_rates', 'Population': 'country_population', 'Prevalence - Depressive disorders - Sex: Both - Age: All Ages (Number) (people suffering from depression)': 'prevalence_depressive_disorders_sex_both_age_all_ages'
         }
 
+        # Renaming the columns of the input dataframe to make it compatible 
+        # with our database schema model.
         input_df.rename(columns=rename_columns, inplace=True)
 
-        # Converting to percentages
+        # Converting all the values to percentage values.
         input_df['prevalence_in_males'] = input_df['prevalence_in_males'] * 100
         input_df['prevalence_in_females'] = input_df['prevalence_in_females'] * 100
 
@@ -91,13 +96,11 @@ def rf():
         input_df['depressive_disorder_rates'] = input_df['depressive_disorder_rates'] * 100
         input_df['prevalence_depressive_disorders_sex_both_age_all_ages'] = input_df['prevalence_depressive_disorders_sex_both_age_all_ages'] * 100
 
-
+        # Grouping our input datafram based on the entity and code.
         group_by_cols = ['entity', 'code']
         input_df = input_df.groupby(group_by_cols)
 
         input_df = input_df.mean().reset_index()
-
-        input_df = input_df.sample(20)
 
         # Saving predictions to the database
         with app.app_context():
@@ -118,6 +121,7 @@ def rf():
             'depressive_disorder_rates', 'country_population', 'prevalence_depressive_disorders_sex_both_age_all_ages'
         ]
 
+        # Dropping the columns that are not to be included while sending the response to the user
         response_df = input_df.drop(columns=final_columns_to_drop)
 
         # Return the result as JSON
