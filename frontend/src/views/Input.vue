@@ -3,7 +3,7 @@
   <div class="input">
     <h2>Input a csv file</h2>
     <div class="file-upload-container">
-      <FileUpload name="demo[]" url="http://192.168.1.183:5000/api/predict/rf" @upload="onAdvancedUpload($event)" :multiple="false" accept=".csv" :maxFileSize="1000000" class="custom">
+      <FileUpload name="demo[]" url="http://localhost:5000/api/predict/rf" @upload="onAdvancedUpload($event)" :multiple="false" accept=".csv" :maxFileSize="1000000" class="custom">
         <template #empty>
           <p>Drag and drop files here to upload.</p>
         </template>
@@ -44,7 +44,7 @@ export default {
       formData.append('file', event.files[0]);
 
       try {
-        const response = await fetch('http://192.168.1.183:5000/api/predict/rf', {
+        const response = await fetch('http://localhost:5000/api/predict/rf', {
           method: 'POST',
           body: formData,
         });

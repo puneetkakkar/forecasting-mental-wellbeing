@@ -7,10 +7,10 @@
             <div class="chart-container">
                 <div class="card-container">
         <Card class="predict-card">
-            <template #title> Worldwide similarity </template>
+            <template #title> Worldwide Distribution </template>
             <template #content>
                 <p class="m-0">
-                    Select a country from drop down to get similar countries prediction
+                    Select a country from drop down to get countries with lesser suicide rates
                 </p>
                 <p><Dropdown v-model="selectedCountry" editable showClear :options="countryOptions" optionLabel="name" placeholder="Select a Country" @change="onCountryChange" class="w-full md:w-14rem" />
                 </p>
@@ -23,7 +23,7 @@
                 <Card class="similar-card" v-if="relatedCountries.length > 0">
                     <template #title>Related Countries</template>
                     <template #content>
-                      <p>These are the countries with the most similar suicide rate</p>
+                      <p>These are the countries with lesser suicide rates</p>
                     <ul>
                         <li v-for="country in relatedCountries" :key="country.country" class="list">
                         <strong>{{ country.country }} :</strong> <strong>{{country.suicide_rate.toFixed(2)}}% </strong>
@@ -220,7 +220,7 @@ export default {
   methods: {
     async fetchCountries(){  
         try {
-            const apiUrl = 'http://192.168.1.183:5000/api/visual/countries-list'; 
+            const apiUrl = 'http://localhost:5000/api/visual/countries-list'; 
             const response = await fetch(apiUrl, { method: 'GET' });    
 
             if (response.ok) {
@@ -240,7 +240,7 @@ export default {
     },
     async fetchRelatedCountries(selectedCountry) {
             try {
-                const response = await fetch('http://192.168.1.183:5000/api/visual/similar-countries', {
+                const response = await fetch('http://localhost:5000/api/visual/similar-countries', {
                     method: 'POST',
                     body: JSON.stringify({
                         country: selectedCountry.name
