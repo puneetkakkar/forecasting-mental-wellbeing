@@ -4,3 +4,24 @@ We have developed a predictive model using random forest regressor to estimate s
 
 
 ![dic](https://github.com/puneetkakkar/forecasting-mental-wellbeing/assets/47149740/9471d74c-634a-4de8-a1d1-d40fc44e0b1e)
+
+
+## Installation
+
+- Install [Docker] as a pre-requisite to run the project.
+
+```bash
+# Clone Forecasting-Mental-Wellbeing Repository
+git clone https://github.com/puneetkakkar/forecasting-mental-wellbeing.git
+
+# Navigate to project directory
+cd forecasting-mental-wellbeing
+
+# To start the project execute the start script
+sh ./start.sh
+
+# To stop the dockers and stop the project, execute the stop script
+sh ./stop.sh
+```
+
+[Docker]: https://docs.docker.com/get-docker/
