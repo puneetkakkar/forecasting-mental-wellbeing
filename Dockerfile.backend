@@ -17,4 +17,4 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 # Define our command to be run when launching the container
-CMD flask run --host 0.0.0.0
+CMD ["gunicorn", "-w 4", "-b 0.0.0.0:5000", "manage:app"]

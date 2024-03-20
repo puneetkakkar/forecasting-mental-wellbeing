@@ -41,9 +41,6 @@ def rf():
         # Converting the values converted to int explicitly
         input_df['Entity'], input_df['Code'] = input_df['Entity'].astype(int), input_df['Code'].astype(int) 
 
-        # Dropping the target coloumn if present in the database
-        input_df = input_df.drop(columns = 'Suicide rate (deaths per 100,000 individuals)')
-
         # Extract numeric features for normalization (excluding 'Entity' and 'Code')
         numeric_features = input_df.drop(columns=['Entity', 'Code'])
 

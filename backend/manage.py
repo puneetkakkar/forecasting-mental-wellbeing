@@ -24,5 +24,9 @@ app.cli.add_command(db_commands_group)
 
 # Initialize the Flask CLI for the 
 # execution of custom-made flask commands
-cli = FlaskGroup(app)
-cli()
+cli = FlaskGroup(create_app=lambda _:app)
+# cli.add_command(db_commands_group)
+
+
+if __name__ == 'main':
+    cli()
