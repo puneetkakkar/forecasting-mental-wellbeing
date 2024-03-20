@@ -20,6 +20,21 @@ cd forecasting-mental-wellbeing
 # To start the project execute the start script
 sh ./start.sh
 
+# Run DB migrations i.e., initialize the db and its schema 
+# based on models definied.
+docker exec –it mental-wellbeing-api flask db init
+
+# Store the DB migrations command to run within the 
+# database as per the models defined in the cod
+docker exec –it mental-wellbeing-api flask db migrate
+
+# Apply the stored migrations to the MySQL database.
+docker exec –it mental-wellbeing-api flask db upgrade
+
+# Once the db migrations are completed, enter the following
+# command to populate data within the database.
+docker exec –it mental-wellbeing-api flask dbc init
+
 # To stop the dockers and stop the project, execute the stop script
 sh ./stop.sh
 ```
