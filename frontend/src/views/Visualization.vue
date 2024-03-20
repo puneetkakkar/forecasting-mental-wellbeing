@@ -220,7 +220,7 @@ export default {
   methods: {
     async fetchCountries(){  
         try {
-            const apiUrl = 'http://localhost:5000/api/visual/countries-list'; 
+            const apiUrl = 'http://localhost/api/v1/visual/countries-list'; 
             const response = await fetch(apiUrl, { method: 'GET' });    
 
             if (response.ok) {

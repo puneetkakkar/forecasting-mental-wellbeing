@@ -1,25 +1,13 @@
 # Here, it is a docker compose config file, that includes frontend, 
 # backend, and mysql services along with their environment variables.
 
-version: '2'
+version: '3'
 services:
-  frontend:
-    container_name: mental-wellbeing-fe
-    build: 
-      context: .
-      dockerfile: Dockerfile.frontend
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx:/etc/nginx/conf.d
-
   backend:
     container_name: mental-wellbeing-api
     build: 
-      context: .
-      dockerfile: Dockerfile.backend
-    ports:
-      - "5000:5000"
+      context: ./backend
+      dockerfile: Dockerfile
     volumes:
       - ./backend:/backend
     links:
@@ -51,12 +39,31 @@ services:
       - '3306'
     volumes:
       - my-db:/var/lib/mysql
-      - ./backend/db-init:/docker-entrypoint-initdb.d
+      - ./db-init:/docker-entrypoint-initdb.d
     environment:
         MYSQL_USER: sapbuffalo
         MYSQL_PASSWORD: sap
         MYSQL_ROOT_PASSWORD: root123
         MYSQL_DATABASE: sp_db
+  
+  frontend:
+    container_name: mental-wellbeing-fe
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    depends_on:
+      - backend
+
+  proxy:
+    container_name: mental-wellbeing-nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
 
 volumes:
   my-db:
