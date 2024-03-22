@@ -39,4 +39,6 @@ docker exec –it mental-wellbeing-api flask dbc init
 sh ./stop.sh
 ```
 
+**NOTE:**  To test the working of the platform, you can try uploading fake data over the platform that can be located inside of the **_backend/data/_** directory.
+
 [Docker]: https://docs.docker.com/get-docker/
